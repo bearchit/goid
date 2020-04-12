@@ -12,19 +12,16 @@ type Generator interface {
 	Generate() ID
 }
 
-var DefaultGenerator = defaultGenerator{}
-
-type defaultGenerator struct {
+type uuidV4Generator struct {
 }
 
-func (g defaultGenerator) Generate() ID {
+func NewUuidV4Generator() Generator {
+	return &uuidV4Generator{}
+}
+
+func (g uuidV4Generator) Generate() ID {
 	return ID(uuid.NewV4().String())
 }
-
-var (
-	MockedID             = ID("1")
-	DefaultMockGenerator = MockGenerator{id: MockedID}
-)
 
 type MockGenerator struct {
 	id ID
@@ -37,6 +34,12 @@ func NewMock(id ID) Generator {
 func (g MockGenerator) Generate() ID {
 	return g.id
 }
+
+var (
+	DefaultGenerator     = NewUuidV4Generator()
+	MockedID             = ID("mocked-id")
+	DefaultMockGenerator = MockGenerator{id: MockedID}
+)
 
 func Generate() ID {
 	return DefaultGenerator.Generate()
