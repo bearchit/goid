@@ -2,6 +2,12 @@ package goid
 
 type ID string
 
+const NilID ID = ""
+
+func (id ID) Nil() bool {
+	return id == NilID
+}
+
 func (id ID) String() string {
 	return string(id)
 }
