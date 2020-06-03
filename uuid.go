@@ -1,14 +1,26 @@
 package goid
 
-import uuid "github.com/satori/go.uuid"
+import (
+	"encoding/hex"
+	uuid "github.com/satori/go.uuid"
+)
 
 type uuidV4Generator struct {
+	dash bool
 }
 
-func NewUuidV4Generator() Generator {
-	return &uuidV4Generator{}
+func NewUuidV4Generator(dash bool) Generator {
+	return &uuidV4Generator{
+		dash: dash,
+	}
 }
 
 func (g uuidV4Generator) Generate() ID {
-	return ID(uuid.NewV4().String())
+	id := uuid.NewV4()
+
+	if g.dash {
+		return ID(id.String())
+	}
+
+	return ID(hex.EncodeToString(id.Bytes()))
 }
