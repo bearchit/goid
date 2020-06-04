@@ -40,3 +40,19 @@ func main() {
 	fmt.Println(g2.Generate())
 }
 ```
+
+### Namespace Generator
+
+#### Default delimiter
+```go
+g := goid.NewNamespaceGenerator("com")
+id := g.Generate("github", "bearchit", "goid")
+// id = com.github.bearchit.goid
+```
+
+#### Custom delimiter
+```go
+g := goid.NewNamespaceGenerator("com", goid.WithDelimiter("-"))
+id := g.Generate("github", "bearchit", "goid")
+// id = com-github.bearchit-goid
+```

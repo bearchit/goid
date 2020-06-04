@@ -2,6 +2,7 @@ package goid
 
 import (
 	"encoding/hex"
+
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -15,7 +16,7 @@ func NewUuidV4Generator(dash bool) Generator {
 	}
 }
 
-func (g uuidV4Generator) Generate() ID {
+func (g uuidV4Generator) Generate(_ ...string) ID {
 	id := uuid.NewV4()
 
 	if g.dash {
