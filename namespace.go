@@ -26,9 +26,9 @@ func NewNamespaceGenerator(
 	return &opt
 }
 
-func (n namespaceGenerator) Generate(args ...string) ID {
+func (n namespaceGenerator) Generate(names ...string) ID {
 	return FromString(
-		fmt.Sprintf("%s%s%s", n.namespace, n.delimiter, strings.Join(args, n.delimiter)),
+		fmt.Sprintf("%s%s%s", n.namespace, n.delimiter, strings.Join(names, n.delimiter)),
 	)
 }
 
