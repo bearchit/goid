@@ -47,6 +47,7 @@ func main() {
 ```go
 g := goid.NewNamespaceGenerator("com")
 id := g.Generate("github", "bearchit", "goid")
+// id = com.github.bearchit.goid
 ```
 
 #### Custom delimiter
