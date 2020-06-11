@@ -1,9 +1,9 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/bearchit/goid)](https://goreportcard.com/report/github.com/bearchit/goid)
+[![Go Docs](https://godoc.org/github.com/bearchit/goid?status.svg)](https://pkg.go.dev/github.com/bearchit/goid)
+
 # goid
 
 A package to manage ID
-
-[![Go Report Card](https://goreportcard.com/badge/github.com/bearchit/goid)](https://goreportcard.com/report/github.com/bearchit/goid)
-[![Go Docs](https://godoc.org/github.com/bearchit/goid?status.svg)](https://pkg.go.dev/github.com/bearchit/goid)
 
 ## Documentattion
 
@@ -53,6 +53,7 @@ func main() {
 ### Namespace Generator
 
 #### Default delimiter
+
 ```go
 g := goid.NewNamespaceGenerator("com")
 id := g.Generate("github", "bearchit", "goid")
@@ -60,6 +61,7 @@ id := g.Generate("github", "bearchit", "goid")
 ```
 
 #### Custom delimiter
+
 ```go
 g := goid.NewNamespaceGenerator("com", goid.WithDelimiter("-"))
 id := g.Generate("github", "bearchit", "goid")
