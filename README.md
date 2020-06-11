@@ -1,11 +1,20 @@
 # goid
 
-## Get Started
-```
-go get github.com/bearchit/goid 
+A package to manage ID
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/bearchit/goid)](https://goreportcard.com/report/github.com/bearchit/goid)
+[![Go Docs](https://godoc.org/github.com/bearchit/goid?status.svg)](https://pkg.go.dev/github.com/bearchit/goid)
+
+## Documentattion
+
+### Installation
+
+```sh
+go get github.com/bearchit/goid
 ```
 
-## Usage
+### Usage
+
 ```go
 package main
 
