@@ -12,13 +12,15 @@ import (
 )
 
 func TestGlobalGenerator(t *testing.T) {
-	mockedID := goid.NewMock(goid.NewUuidV4Generator(true).Generate()).Generate()
-	g := goid.NewGlobalGenerator()
+	mockGenerator := goid.NewMock(goid.NewUuidV4Generator(true).Generate())
+	g := goid.NewGlobalGenerator(
+		goid.WithGenerator(mockGenerator),
+	)
 
-	id := g.Prefix("object").ID(mockedID).Generate()
+	id := g.Prefix("object").Generate()
 
 	decoded, err := base64.URLEncoding.DecodeString(id.String())
 	require.NoError(t, err)
 
-	assert.Equal(t, fmt.Sprintf("object:%s", mockedID), string(decoded))
+	assert.Equal(t, fmt.Sprintf("object:%s", mockGenerator.Generate()), string(decoded))
 }

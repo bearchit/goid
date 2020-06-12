@@ -7,7 +7,7 @@ import (
 
 type globalGenerator struct {
 	prefix    string
-	id        ID
+	generator Generator
 	delimiter string
 }
 
@@ -25,17 +25,18 @@ func NewGlobalGenerator(
 	return &opt
 }
 
+func WithGenerator(generator Generator) func(*globalGenerator) {
+	return func(g *globalGenerator) {
+		g.generator = generator
+	}
+}
+
 func (g globalGenerator) Generate(args ...string) ID {
-	id := fmt.Sprintf("%s%s%s", g.prefix, g.delimiter, g.id)
+	id := fmt.Sprintf("%s%s%s", g.prefix, g.delimiter, g.generator.Generate(args...))
 	return FromString(base64.URLEncoding.EncodeToString([]byte(id)))
 }
 
 func (g globalGenerator) Prefix(prefix string) globalGenerator {
 	g.prefix = prefix
-	return g
-}
-
-func (g globalGenerator) ID(id ID) globalGenerator {
-	g.id = id
 	return g
 }
