@@ -34,5 +34,5 @@ func (ids IDs) Contains(id ID) bool {
 }
 
 type Generator interface {
-	Generate(args ...string) ID
+	Generate() ID
 }

@@ -8,12 +8,13 @@ import (
 type namespaceGenerator struct {
 	namespace string
 	delimiter string
+	names     []string
 }
 
 func NewNamespaceGenerator(
 	namespace string,
 	opts ...func(*namespaceGenerator),
-) Generator {
+) *namespaceGenerator {
 	opt := namespaceGenerator{
 		namespace: namespace,
 		delimiter: ".",
@@ -26,9 +27,14 @@ func NewNamespaceGenerator(
 	return &opt
 }
 
-func (n namespaceGenerator) Generate(names ...string) ID {
+func (n namespaceGenerator) Names(names ...string) namespaceGenerator {
+	n.names = names
+	return n
+}
+
+func (n namespaceGenerator) Generate() ID {
 	return FromString(
-		fmt.Sprintf("%s%s%s", n.namespace, n.delimiter, strings.Join(names, n.delimiter)),
+		fmt.Sprintf("%s%s%s", n.namespace, n.delimiter, strings.Join(n.names, n.delimiter)),
 	)
 }
 

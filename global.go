@@ -32,8 +32,8 @@ func WithGenerator(generator Generator) func(*globalGenerator) {
 	}
 }
 
-func (g globalGenerator) Generate(args ...string) ID {
-	id := fmt.Sprintf("%s%s%s", g.prefix, g.delimiter, g.generator.Generate(args...))
+func (g globalGenerator) Generate() ID {
+	id := fmt.Sprintf("%s%s%s", g.prefix, g.delimiter, g.generator.Generate())
 	return FromString(base64.URLEncoding.EncodeToString([]byte(id)))
 }
 

@@ -8,6 +8,6 @@ func NewMock(id ID) Generator {
 	return &MockGenerator{id: id}
 }
 
-func (g MockGenerator) Generate(_ ...string) ID {
+func (g MockGenerator) Generate() ID {
 	return g.id
 }

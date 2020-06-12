@@ -10,12 +10,12 @@ import (
 
 func TestNamespaceGenerator_Generate(t *testing.T) {
 	g := goid.NewNamespaceGenerator("com")
-	id := g.Generate("github", "bearchit", "goid")
+	id := g.Names("github", "bearchit", "goid").Generate()
 	assert.Equal(t, "com.github.bearchit.goid", id.String())
 }
 
 func TestWithDelimiter(t *testing.T) {
 	g := goid.NewNamespaceGenerator("com", goid.WithDelimiter("-"))
-	id := g.Generate("github", "bearchit", "goid")
+	id := g.Names("github", "bearchit", "goid").Generate()
 	assert.Equal(t, "com-github-bearchit-goid", id.String())
 }

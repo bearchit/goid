@@ -16,7 +16,7 @@ func NewUuidV4Generator(dash bool) Generator {
 	}
 }
 
-func (g uuidV4Generator) Generate(_ ...string) ID {
+func (g uuidV4Generator) Generate() ID {
 	id := uuid.NewV4()
 
 	if g.dash {
