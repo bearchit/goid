@@ -32,8 +32,12 @@ func TestParseGlobalID(t *testing.T) {
 	)
 
 	id := g.Prefix("object").Generate()
+	mockedID := mockGenerator.Generate()
 
 	globalID, err := goid.ParseGlobalID(id)
 	require.NoError(t, err)
-	t.Log(globalID)
+
+	assert.Equal(t, "object", globalID.Prefix)
+	assert.Equal(t, ":", globalID.Delimiter)
+	assert.Equal(t, mockedID, globalID.ID)
 }
