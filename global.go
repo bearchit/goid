@@ -3,6 +3,7 @@ package goid
 import (
 	"encoding/base64"
 	"fmt"
+	"regexp"
 )
 
 type globalGenerator struct {
@@ -39,4 +40,30 @@ func (g globalGenerator) Generate(args ...string) ID {
 func (g globalGenerator) Prefix(prefix string) globalGenerator {
 	g.prefix = prefix
 	return g
+}
+
+type GlobalID struct {
+	Prefix    string
+	Delimiter string
+	ID        ID
+}
+
+func ParseGlobalID(id ID) (*GlobalID, error) {
+	decoded, err := base64.URLEncoding.DecodeString(id.String())
+	if err != nil {
+		return nil, err
+	}
+
+	reg := regexp.MustCompile(`(.+)(:)(.+)`)
+	tokens := reg.FindStringSubmatch(string(decoded))
+
+	if len(tokens) != 4 {
+		return nil, fmt.Errorf("invalid GlobalID format: %v", string(decoded))
+	}
+
+	return &GlobalID{
+		Prefix:    tokens[1],
+		Delimiter: tokens[2],
+		ID:        FromString(tokens[3]),
+	}, nil
 }

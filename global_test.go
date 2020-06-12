@@ -24,3 +24,16 @@ func TestGlobalGenerator(t *testing.T) {
 
 	assert.Equal(t, fmt.Sprintf("object:%s", mockGenerator.Generate()), string(decoded))
 }
+
+func TestParseGlobalID(t *testing.T) {
+	mockGenerator := goid.NewMock(goid.NewUuidV4Generator(true).Generate())
+	g := goid.NewGlobalGenerator(
+		goid.WithGenerator(mockGenerator),
+	)
+
+	id := g.Prefix("object").Generate()
+
+	globalID, err := goid.ParseGlobalID(id)
+	require.NoError(t, err)
+	t.Log(globalID)
+}
