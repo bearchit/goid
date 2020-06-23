@@ -30,8 +30,14 @@ func TestNewIDs(t *testing.T) {
 	assert.Equal(t, 4, len(ids))
 }
 
+func TestIDs_Add(t *testing.T) {
+	ids := goid.NewIDs()
+	ids.Add("1", "2")
+	assert.True(t, ids.Contains("1", "2"))
+}
+
 func TestIDs_Contains(t *testing.T) {
 	ids := goid.NewIDs("1", "2", "3", "4")
-	assert.True(t, ids.Contains("1"))
-	assert.False(t, ids.Contains("5"))
+	assert.True(t, ids.Contains("1", "2"))
+	assert.False(t, ids.Contains("5", "6"))
 }

@@ -24,10 +24,16 @@ func NewIDs(id ...ID) IDs {
 	return ids
 }
 
-func (ids IDs) Contains(id ID) bool {
+func (ids *IDs) Add(others ...ID) {
+	*ids = append(*ids, others...)
+}
+
+func (ids IDs) Contains(others ...ID) bool {
 	for _, x := range ids {
-		if x == id {
-			return true
+		for _, other := range others {
+			if x == other {
+				return true
+			}
 		}
 	}
 	return false
